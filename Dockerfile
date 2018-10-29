@@ -2,4 +2,5 @@ FROM gcc:latest
 COPY . /usr/src/myapp
 WORKDIR /usr/src/myapp
 RUN gcc -o myapp main.cpp
-CMD ["./myapp"]
+EXPOSE 8089
+CMD ["./myapp","8089"]
