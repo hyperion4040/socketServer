@@ -29,7 +29,7 @@ int main(int argc , char *argv[])
     //Prepare the sockaddr_in structure
     server.sin_family = AF_INET;
     server.sin_addr.s_addr = INADDR_ANY;
-    server.sin_port = htons( 8888 );
+    server.sin_port = htons( 5000 );
 
     //Bind
     if( bind(socket_desc,(struct sockaddr *)&server , sizeof(server)) < 0)
@@ -90,19 +90,23 @@ void *connection_handler(void *socket_desc)
     char *message , client_message[2000];
 
     //Send some messages to the client
-    message = const_cast<char *>("Greetings! I am your connection handler\n");
+   /* message = const_cast<char *>("Greetings! I am your connection handler\n");
     write(sock , message , strlen(message));
 
     message = const_cast<char *>("Now type something and i shall repeat what you type \n");
-    write(sock , message , strlen(message));
+    write(sock , message , strlen(message));*/
 
     //Receive a message from client
     while( (read_size = recv(sock , client_message , 2000 , 0)) > 0 )
     {
         //Send the message back to client
+
         write(sock , client_message , strlen(client_message));
+
+
     }
-    write(sock,message,strlen(client_message));
+//    write(sock,message,strlen(client_message));
+
     if(read_size == 0)
     {
         puts("Client disconnected");
